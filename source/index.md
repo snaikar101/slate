@@ -1,13 +1,9 @@
 ---
-title: API Reference
+title: Vetr API Reference
 
-language_tabs:
-  - shell
-  - ruby
-  - python
-
+  
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='mailto:contact@vetr.com'>Request for a Developer Key</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
@@ -18,105 +14,126 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to Vetr developer's guide. Vetr is an investment research platform that delivers crowdsourced star ratings for stocks and provides access to investment insights from trusted sources for self-driven investors. Vetr provides simple REST API's to get aggregated ratings of the crowd and other information related to securities. They are easy to use and integrate all you need is the api key
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# How to use
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
-# Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+> Replace [API_KEY] with the key provided by Vetr:
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+$ curl  https://api-prod.vetr.com/api/[API_KEY]/research/getaggregateratings?exchange=NYSE
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+Vetr uses API keys to allow access to the API. You can register for API key contacting us at  [contact@vetr.com](mailto:contact@vetr.com).
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+Vetr expects for the API key to be included in all API requests to the server and that API is not shared with other users
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+# APIs
 
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace `meowmeowmeow` with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Security Details
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+$ curl  https://api-prod.vetr.com/api/[API_KEY]/research/securityInfo?ticker=NASDAQ:AAPL
 ```
-
-> The above command returns JSON structured like this:
+>Response:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+{
+  "data": {
+    "security": {
+      "securityMasterId": 4275,
+      "ticker": "AAPL",
+      "company": "Apple Inc",
+      "exchange": "NASDAQ",
+      "securityWallId": 4275,
+      "fullTicker": "NASDAQ:AAPL",
+      "resultScore": 0,
+      "secType": null,
+      "remark": null,
+      "active": true
+    },
+    "heldByCount": 406,
+    "financialhighlights": {
+      "symbol": "AAPL",
+      "marketCapitalization": 738869248000,
+      "insiderShareholders": 0.0007,
+      "annualRevenue": 199800,
+      "ttmRevenue": 148812000000,
+      "sharesOutstanding": 5824750,
+      "institutionalShareholders": 60.540001,
+      "oneYearReturn": 73.92,
+      "threeYearReturn": 66.27,
+      "fiveYearReturn": 278.83,
+      "ttmRevenueGrowth": 148812000000,
+      "fiveYearRevenueGrowth": 180.25,
+      "fiveYearEarningsGrowth": 198.61,
+      "fiveYearDividendGrowth": 0,
+      "annualEPS": 7.42,
+      "annualDividendRate": 1.88,
+      "annualDividendYield": 1.49
+    },
+    "aggratingcalc": {
+      "securityMasterId": 4275,
+      "ratingComputeDate": "2015-04-22",
+      "aggRatingScore": 3.2564102564102564,
+      "totalRatings": 78,
+      "bullishCount": 45,
+      "bearishCount": 33,
+      "totalBuys": 38,
+      "totalSells": 28,
+      "totalHolds": 12,
+      "avg3mTarget": 129.07035714285715,
+      "avg3mTargetPct": 0.017022749530038225,
+      "avg6mTarget": 134.95529411764704,
+      "avg6mTargetPct": 0.06339369724723856,
+      "avg9mTarget": 0,
+      "avg9mTargetPct": 0,
+      "avg12mTarget": 0,
+      "avg12mTargetPct": 0,
+      "currentPrice": 126.91,
+      "direction": "no",
+      "prev_score": 3.2564102564102564,
+      "valid": true
+    },
+    "companyProfile": {
+      "symbol": "AAPL",
+      "exchange": "NASDAQ",
+      "exchangeName": "Apple Inc",
+      "sicSector": "3571",
+      "industry": "Computer",
+      "subIndustry": "Mini",
+      "businessSummary": "Apple Inc. is engaged in designing, manufacturing and marketing mobile communication and media devices, personal computers, and portable digital music players. The Company's products and services include iPhone, iPad, Mac, iPod, Apple TV, a portfolio of consumer and professional software applications, the iOS and Mac OS X operating systems, iCloud, and a range of accessory, service and support offerings. It sells its products worldwide through its online stores, its retail stores, its direct sales force, third-party wholesalers, and resellers. Apple Inc. is headquartered in Cupertino, California.",
+      "ceo": "Timothy D. Cook",
+      "address": "ONE INFINITE LOOP",
+      "city": "CUPERTINO",
+      "state": "CA",
+      "zipCode": "95014",
+      "phoneNumber": "408-996-1010"
+    }
   },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+  "success": true,
+  "errorMessage": "",
+  "totalRecords": -1,
+  "hasMore": false,
+  "sgn": false
+}
 ```
 
-This endpoint retrieves all kittens.
+
+This endpoint retrieves all the details of a particular ticker.
 
 ### HTTP Request
 
-`GET http://example.com/kittens`
+`GET $ https://api-prod.vetr.com/api/[API_KEY]/research/securityInfo?ticker=<ticker>`
 
-### Query Parameters
+Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Optional | Default | Description
+--------- | -------- | ------- | -----------
+ticker| false | - | It is a colon separated exchange and ticker EX: NASDAQ:AAPL 
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+If you do not know the exchange you can skip it and just use ticker EX: APPL. It is always adviced to use exchange to avoid conflicting tickers
 </aside>
 
 ## Get a Specific Kitten
