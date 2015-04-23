@@ -43,9 +43,9 @@
 <h1 id="how-to-use">How to use</h1>
 
 <blockquote>
-<p>Replace [API_KEY] with the key provided by Vetr:</p>
+<p>Replace &lt;API_KEY&gt; with the key provided by Vetr:</p>
 </blockquote>
-<pre><code class="highlight shell"><span class="gp">$ </span>curl  https://api-prod.vetr.com/api/[API_KEY]/research/getaggregateratings?exchange<span class="o">=</span>NYSE
+<pre><code class="highlight shell"><span class="gp">$ </span>curl  https://vetr-prod.apigee.net/v1/api/research/getaggregateratings?exchange<span class="o">=</span>NASDAQ&amp;apikey<span class="o">=</span>&lt;API_KEY&gt;
 </code></pre>
 
 <p>Vetr uses API keys to allow access to the API. You can register for API key contacting us at  <a href="mailto:contact@vetr.com">contact@vetr.com</a>.</p>
@@ -55,7 +55,7 @@
 <h1 id="apis">APIs</h1>
 
 <h2 id="security-details">Security Details</h2>
-<pre><code class="highlight shell"><span class="gp">$ </span>curl  https://api-prod.vetr.com/api/[API_KEY]/research/securityInfo?ticker<span class="o">=</span>NASDAQ:AAPL
+<pre><code class="highlight shell"><span class="gp">$ </span>curl  https://vetr-prod.apigee.net/v1/api/research/securityInfo?ticker<span class="o">=</span>NASDAQ:AAPL&amp;apikey<span class="o">=</span>&lt;API_KEY&gt; 
 </code></pre>
 
 <blockquote>
@@ -144,9 +144,9 @@
 
 <p>This endpoint retrieves all the details of a particular ticker.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p>HTTP Request</p>
 
-<p><code class="prettyprint">GET $ https://api-prod.vetr.com/api/[API_KEY]/research/securityInfo?ticker=&lt;ticker&gt;</code></p>
+<p><code class="prettyprint">GET https://vetr-prod.apigee.net/v1/api/research/securityInfo?ticker=&lt;ticker&gt;&amp;apikey=&lt;API_KEY&gt;</code></p>
 
 <p>Query Parameters</p>
 
@@ -160,64 +160,666 @@
 </thead><tbody>
 <tr>
 <td>ticker</td>
-<td>false</td>
+<td>No</td>
 <td>-</td>
 <td>It is a colon separated exchange and ticker EX: NASDAQ:AAPL</td>
 </tr>
 </tbody></table>
 
+<p>Example Request/Response</p>
+
+<ul>
+<li><a href="https://www.hurl.it/?url=https://vetr-prod.apigee.net/v1/api/research/securityInfo&amp;method=GET&amp;args={%22apikey%22:[%22[Enter%20your%20API%20KEY%20here]%22],%22ticker%22:[%22NASDAQ:AAPL%22]}">Example to get security details</a> </li>
+</ul>
+
 <aside class="notice">
 If you do not know the exchange you can skip it and just use ticker EX: APPL. It is always adviced to use exchange to avoid conflicting tickers
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre><code class="highlight ruby"><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight python"><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre><code class="highlight shell">curl <span class="s2">"http://example.com/api/kittens/3"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<h2 id="ratings-of-user">Ratings of User</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl  https://vetr-prod.apigee.net/v1/api/recommendations/ratings/Santosh-Kn?start<span class="o">=</span>0&amp;limit<span class="o">=</span>4&amp;apikey<span class="o">=</span>&lt;API_KEY&gt; 
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Response:</p>
 </blockquote>
 <pre><code class="highlight json"><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"security"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9144</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Advance Auto Parts Inc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NYSE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9144</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullTicker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NYSE:AAP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"resultScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remark"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activeRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4915442010-agfinancialmgt-shared-a-chart-on-StockTwits"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">16300</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-05T20:21:46.998Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"agfinancialmgt shared a chart on StockTwits"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9144</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9144</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">149.52000427246094</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-11-05T05:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1Y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1154379248894463</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.013</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"security"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAPL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apple Inc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullTicker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ:AAPL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"resultScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remark"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activeRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7910697854"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">22046</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-01-27T20:19:37.225Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">111.19999694824219</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-27T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3M"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.09034364795521695</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.157</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"security"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">53535</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAVL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Avalanche Biotechnologies Inc."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">53535</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullTicker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ:AAVL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"resultScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remark"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activeRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7373739041"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">22981</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-09T15:10:56.484Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">53535</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">53535</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">33.869998931884766</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">39</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-09T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6M"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0017980991523246926</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.149</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"security"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4278</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ABAX"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Abaxis Inc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4278</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullTicker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ:ABAX"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"resultScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"secType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"remark"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"latestRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activeRecommendationSummary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2449661116"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">23813</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-20T19:54:41.722Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4278</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4278</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">60.310001373291016</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-20T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6M"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.07509881422924901</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.049</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hasMore"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sgn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint retrieves all the recommendations of a particular user</p>
 
-<aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
+<p>HTTP Request:</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<p><code class="prettyprint">GET https://vetr-prod.apigee.net/v1/api/recommendations/ratings/[ProfileSlug]?start=&lt;start&gt;&amp;limit=&lt;limit&gt;&amp;apikey=&lt;API_KEY&gt;</code></p>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
+<p>Url Parameters:</p>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Optional</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the cat to retrieve</td>
+<td>ProfileSlug</td>
+<td>No</td>
+<td>-</td>
+<td>profile handler/slug of the user whoes ratings are needed</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Yes</td>
+<td>0</td>
+<td>Starting index of the ratings (Index starts from 0)</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Yes</td>
+<td>50</td>
+<td>Limit the number of ratings returned from the starting index</td>
 </tr>
 </tbody></table>
+
+<p>Example Request/Response</p>
+
+<ul>
+<li><a href="https://www.hurl.it/?url=https://vetr-prod.apigee.net/v1/api/recommendations/ratings/[ProfileSlug]&amp;method=GET&amp;args={%22apikey%22:[%22[Enter%20your%20API%20KEY%20here]%22],%22start%22:[%220%22],%22limit%22:[%2210%22]}">Example to get ratings of a particular user</a>  (replace [ProfileSlug] in URL and enter the API_KEY) </li>
+</ul>
+
+<h2 id="ratings-of-user-for-a-security">Ratings of User for a security</h2>
+<pre><code class="highlight shell"><span class="gp">$ </span>curl  https://vetr-prod.apigee.net/v1/api/recommendations/ratings/Santosh-Kn/NASDAQ:AAPL?apikey<span class="o">=</span>&lt;API_KEY&gt; 
+</code></pre>
+
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QGPYBEguPQgzSC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">12757</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-09-17T19:56:08.723Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apple iPhone 6 pre-orders hit record 4 million on first day"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">101.27999877929688</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-12-17T05:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3M"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1111111111111111</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.5</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.066</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7407207951"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">16673</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2014-11-11T18:47:24.144Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">108.8499984741211</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-11T05:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3M"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.09062154040803412</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.162</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4086059908"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">23638</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdOn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-02-18T19:02:45.857Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BEARISH"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">127.70999908447266</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-05-18T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3M"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.07535829865926955</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.016</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hasMore"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sgn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all the recommendations of a particular user for a particular ticker</p>
+
+<p>HTTP Request:</p>
+
+<p><code class="prettyprint">GET https://vetr-prod.apigee.net/v1/api/recommendations/ratings/[ProfileSlug]/[ticker]?apikey=&lt;API_KEY&gt;</code></p>
+
+<p>URL Parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ProfileSlug</td>
+<td>No</td>
+<td>-</td>
+<td>profile handler/slug of the user whoes ratings are needed</td>
+</tr>
+<tr>
+<td>ticker</td>
+<td>No</td>
+<td>-</td>
+<td>It is a colon separated exchange and ticker EX: NASDAQ:AAPL</td>
+</tr>
+</tbody></table>
+
+<p>Example Request/Response:</p>
+
+<ul>
+<li><a href="https://www.hurl.it/?url=https://vetr-prod.apigee.net/v1/api/recommendations/ratings/[ProfileSlug]/[ticker]&amp;method=GET&amp;args={%22apikey%22:[%22[Enter%20your%20API%20KEY%20here]%22]}">Example to get ratings of a particular user</a>  (replace [ProfileSlug] and [ticker] in URL and enter the API_KEY) </li>
+</ul>
+
+<h2 id="posts-of-ticker">Posts Of Ticker</h2>
+<pre><code class="highlight shell">
+<span class="gp">$ </span>curl https://vetr-prod.apigee.net/v1/api/posts/ticker?ticker<span class="o">=</span>NASDAQ:AAPL&amp;sortBy<span class="o">=</span>post_id:desc&amp;show<span class="o">=</span>all&amp;ratingsFilter<span class="o">=</span>active_only&amp;fullText<span class="o">=</span><span class="nb">false</span>&amp;start<span class="o">=</span>12&amp;limit<span class="o">=</span>14&amp;apikey<span class="o">=</span>&lt;API_KEY&gt;
+
+</code></pre>
+
+<blockquote>
+<p>Response </p>
+</blockquote>
+<pre><code class="highlight json"><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3729288021"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RECOMMENDATION"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"visibility"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUBLIC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recommendation:27752"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"publishedToProfileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ownerProfileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"commentCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"shortUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://go.vetr.com/1yIbA7z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"importedAnalystRating"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"recommendationId"</span><span class="p">:</span><span class="w"> </span><span class="mi">27752</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuePrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">125.55</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expiryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NASDAQ:AAPL"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issueDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-19"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-19"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-19T16:44:36.322Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetTimeFrame"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6M"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rating"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BULLISH"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"commentary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apple Inc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuedByProfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"profileType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEMBER"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Day and Swing Trading"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/whisperinvest-images/default.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionMemberId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1160</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionPageId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlugAlias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingsCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subscriberCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contributesToPages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"unClaimed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"ownerProfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"profileType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEMBER"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Day and Swing Trading"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/whisperinvest-images/default.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionMemberId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1160</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionPageId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlugAlias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitchgettingrich"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingsCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subscriberCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contributesToPages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"unClaimed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"priorRatingId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"nextRatingId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"targetPriceReached"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingCalc"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"recommendationRatingId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingComputeDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-23"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingScore"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pctToTarget"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3869625520110957</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"returnPct"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.034</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"lastMarketPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">129.78</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targetPriceReached"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"targetPriceOff"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"likedByMe"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downVotedByMe"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"allowEdit"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"relatedTickers"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"contestEntry"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"closed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"expired"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"long"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"postUid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0180160778-Notable-Initiations-Apple-AAPL-Plug-Power-PLUG-CyberArk-CYBR-FuelCell-Energy"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"postType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ARTICLE"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"visibility"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PUBLIC"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"entryId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"article:106796"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"publishedToProfileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wall-Street-Pit"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ownerProfileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investing-Channel"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"score"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"commentCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"externalSourceId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investing-Channel:http://wallstreetpit.com/107950-notable-initiations-apple-aapl-plug-power-plug-cyberark-cybr-fuelcell-energy-fcel-cytrx-cytr/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"shortUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://go.vetr.com/1Jc4XdI"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"importedAnalystRating"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ratingAction"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"analystRating"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attachments"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"articleId"</span><span class="p">:</span><span class="w"> </span><span class="mi">106796</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuedByMemberId"</span><span class="p">:</span><span class="w"> </span><span class="mi">387</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityMasterId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"securityWallId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4275</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ticker"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"company"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"articleType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEXT"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"articleTitle"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notable Initiations: Apple  $AAPL, Plug Power  $PLUG, CyberArk  $CYBR, FuelCell Energy  $FCEL, CytRx  $CYTR"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"articleText"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;In a report published Friday, FBR Capital analysts initiated coverage on Apple Inc.  &lt;a href=\"/research/NASDAQ:AAPL\" analytics-on=\"click\" analytics-category=\"outbound\" analytics-event=\"url\" analytics-label=\"/research/NASDAQ:AAPL\"&gt;$AAPL&lt;/a&gt; with a 'Outperform' rating and $185 price target. On valuation measures, Apple Inc. shares currently have a PEG and forward P/E ratio of 1.10 and 13.35, respectively. Price/sales for the same period is 3.68 while EPS is $7.39.&lt;/p&gt;\n"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"articleUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wallstreetpit.com/107950-notable-initiations-apple-aapl-plug-power-plug-cyberark-cybr-fuelcell-energy-fcel-cytrx-cytr/"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"embedInfo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"provider_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wallstreetpit.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"width"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"provider_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wall Street Pit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"link"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Notable Initiations: Apple (AAPL), Plug Power (PLUG), CyberArk (CYBR), FuelCell Energy (FCEL), CytRx (CYTR)"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WSP"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wallstreetpit.com/author/editor/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"In a report published Friday, FBR Capital analysts initiated coverage on Apple Inc. (AAPL) with a 'Outperform' rating and $185 price target. On valuation measures, Apple Inc. shares currently have a PEG and forward P/E ratio of 1.10 and 13.35, respectively. Price/sales for the same period is 3.68 while EPS is $7.39."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumbnail_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/imgproxyCrop?url=http%3A%2F%2Fwallstreetpit.com%2Fwp-content%2Fthemes%2Fmain_theme%2Fsociable%2Ffb-logo-250x250.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumbnail_width"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"thumbnail_height"</span><span class="p">:</span><span class="w"> </span><span class="mi">250</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wallstreetpit.com/107950-notable-initiations-apple-aapl-plug-power-plug-cyberark-cybr-fuelcell-energy-fcel-cytrx-cytr/"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"relatedTickers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"NASDAQ:AAPL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"NASDAQ:CYTR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"NASDAQ:FCEL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"NASDAQ:PLUG"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"NASDAQ:CYBR"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"relatedSecMasterIds"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"issuedByProfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"profileType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAGE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wall Street Pit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wall Street Pit is a financial news and opinion website covering the economy, markets and global finance."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/assets-prod.whisperinvest.com/profile-pics/Wall-Street-Pit/normal.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileWebLink"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://wallstreetpit.com/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionMemberId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionPageId"</span><span class="p">:</span><span class="w"> </span><span class="mi">356</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wall-Street-Pit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlugAlias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wall-Street-Pit"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingsCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subscriberCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contributesToPages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"unClaimed"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"ownerProfile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"profileType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MEMBER"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investing Channel"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profilePictureUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/whisperinvest-images/default.png"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionMemberId"</span><span class="p">:</span><span class="w"> </span><span class="mi">387</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"connectionPageId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlug"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investing-Channel"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"profileSlugAlias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Investing-Channel"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"isVerified"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ratingsCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"subscriberCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"contributesToPages"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="s2">"unClaimed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"likedByMe"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"likedBy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downVotedByMe"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downVotedBy"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"allowEdit"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-04-17T19:41:24.154Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"long"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"errorMessage"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"totalRecords"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"hasMore"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sgn"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>This endpoint returns all the posts realted to a ticker.</p>
+
+<p>HTTP Request:</p>
+
+<p><code class="prettyprint">GET https://vetr-prod.apigee.net/v1/api/posts/ticker?ticker=&lt;ticker&gt;&amp;sortBy=&lt;sortBy&gt;&amp;show=&lt;show&gt;&amp;ratingsFilter=&lt;ratingsFilter&gt;&amp;fullText=&lt;fullText&gt;&amp;start=&lt;start&gt;&amp;limit=&lt;limit&gt;&amp;apikey=&lt;API_KEY&gt;</code></p>
+
+<p>URL Parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ticker</td>
+<td>No</td>
+<td>-</td>
+<td>It is a colon separated exchange and ticker EX: NASDAQ:AAPL</td>
+</tr>
+<tr>
+<td>sortBy</td>
+<td>Yes</td>
+<td>popular</td>
+<td>Specifiy the order in which records are sorted [More deatils below this table]</td>
+</tr>
+<tr>
+<td>show</td>
+<td>Yes</td>
+<td>all</td>
+<td>Specifiy whether to display only posts (&lsquo;posts_only&rsquo;) or only ratings(&#39;ratings_only&rsquo;) or both(&#39;all&rsquo;)</td>
+</tr>
+<tr>
+<td>ratingsFilter</td>
+<td>Yes</td>
+<td>active_only</td>
+<td>Spicifies filter for rating [More deatils below this table]</td>
+</tr>
+<tr>
+<td>fullText</td>
+<td>Yes</td>
+<td>false</td>
+<td>Specifies whether to fetch full text of article(&#39;true&rsquo;) or summary only(&#39;false&rsquo;)</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Yes</td>
+<td>0</td>
+<td>Starting index of the post (Index starts from 0)</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Yes</td>
+<td>10</td>
+<td>Limit here indicates the end of index EX:start=7&amp;limit=10 then it fetches posts 7,8 and 9</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>sortBy:</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+<th>Restriction</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>popular</td>
+<td>sort based on popularity</td>
+<td>-</td>
+</tr>
+<tr>
+<td>created_on:asc</td>
+<td>sort based on creation date of posts in ascending order</td>
+<td>-</td>
+</tr>
+<tr>
+<td>created_on:desc</td>
+<td>sort based on creation date of posts in descending order</td>
+<td>-</td>
+</tr>
+<tr>
+<td>recommendation_id:asc</td>
+<td>sort based on creation date of ratings in ascending order</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>recommendation_id:desc</td>
+<td>sort based on creation date of ratings in descending order</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>rating_score:asc</td>
+<td>Lowest rated first</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>rating_score:desc</td>
+<td>Highest rated first</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>target_price:asc</td>
+<td>Lowest target price first</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>target_price:desc</td>
+<td>Highest target price first</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>expiry_date:asc</td>
+<td>Earliest Expiration first</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+<tr>
+<td>expiry_date:desc</td>
+<td>Latest Expiration first</td>
+<td>to be used only with show=ratings_only</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>ratingsFilter</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>active_only</td>
+<td>Include active ratings only which is neither closed nor expired</td>
+</tr>
+<tr>
+<td>past_only</td>
+<td>Include ratings that are either closed or expired</td>
+</tr>
+<tr>
+<td>bullish_only</td>
+<td>Include ratings which are active and also Bullish</td>
+</tr>
+<tr>
+<td>bearish_only</td>
+<td>Include ratings which are active and also Bearish</td>
+</tr>
+</tbody></table>
+
+<p>Example Request/Response:
+//https://vetr-prod.apigee.net/v1/api/posts/ticker?ticker=<ticker>&amp;sortBy=<sortBy>&amp;show=<show>&amp;ratingsFilter=<ratingsFilter>&amp;fullText=<fullText>&amp;start=<start>&amp;limit=<limit>&amp;apikey=<API_KEY></p>
+
+<ul>
+<li><p><a href="https://www.hurl.it/?url=https://vetr-prod.apigee.net/v1/api/posts/ticker&amp;method=GET&amp;args={%22apikey%22:[%22[Enter%20your%20API%20KEY%20here]%22],%22ticker%22:[%22NASDAQ:AAPL%22]}">Example to get top 10 posts related to NASDAQ:AAPL</a> </p></li>
+<li><p><a href="https://www.hurl.it/?url=https://vetr-prod.apigee.net/v1/api/posts/ticker&amp;method=GET&amp;args={%22apikey%22:[%22[Enter%20your%20API%20KEY%20here]%22],%22ticker%22:[%22NASDAQ:AAPL%22],%22show%22:[%22ratings_only%22],%22ratingsFilter%22:[%22bullish_only%22],%22sortBy%22:[%22recommendation_id:desc%22]}">Example to get latest bullish ratings for NASDAQ:AAPL</a>  </p></li>
+</ul>
 
           <h1 id="errors">Errors</h1>
 
