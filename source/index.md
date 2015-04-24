@@ -641,7 +641,6 @@ bearish_only | Include ratings which are active and also Bearish
 
 
 Example Request/Response:
-//https://vetr-prod.apigee.net/v1/api/posts/ticker?ticker=<ticker>&sortBy=<sortBy>&show=<show>&ratingsFilter=<ratingsFilter>&fullText=<fullText>&start=<start>&limit=<limit>&apikey=<API_KEY>
 
 * [Example to get top 10 posts related to NASDAQ:AAPL](https://www.hurl.it/?url=https://vetr-prod.apigee.net/v1/api/posts/ticker&method=GET&args={%22apikey%22:[%22[Enter%20your%20API%20KEY%20here]%22],%22ticker%22:[%22NASDAQ:AAPL%22]}) 
 
